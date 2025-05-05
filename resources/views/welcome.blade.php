@@ -39,14 +39,12 @@
 <div class="container mt-5">
     <div class="row">
         @foreach($restaurants as $restaurant)
-            <div class="col-12 col-md-4 mb-4">
                 <x-card-restaurant                     
                     :image="$restaurant['image']"
                     :title="$restaurant['title']"
                     :description="$restaurant['description']"
                     :classification="$restaurant['classification']" 
                 />
-            </div>
         @endforeach
     </div>
 </div>
