@@ -26,6 +26,19 @@ Route::get('/verify-cnpj', function(Request $request) {
     return response()->json($resp->json());
 });
 
+// Route::get('/verify-cep', function(Request $request) {
+//     $cep = preg_replace('/\D/', '', $request->query('cep'));
+//     if (strlen($cep) !== 8) {
+//         return response()->json(['error' => 'CEP inválido'], 422);
+//     }
+//     $resp = Http::withOptions([
+//         'verify' => false,
+//     ])->get("https://viacep.com.br/ws/${cep}/json/");
+//     return response()->json($resp->json());
+// });
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+?>

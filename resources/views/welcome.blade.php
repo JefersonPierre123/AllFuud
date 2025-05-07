@@ -96,6 +96,6 @@
     </div>
 </div>
 
-<x-user-registration-form />
+{{-- <x-user-registration-form /> --}}
 <x-establishment-registration-form />
 @endsection
