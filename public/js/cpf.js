@@ -1,28 +1,38 @@
 function verificarCPF() {
-  const cpfInput = document.getElementById('cpf');
-  const cpf = cpfInput?.value?.replace(/\D/g, '');
+  const input = document.getElementById('cpf');
+  const cpf = input.value;
 
-  if (cpf.length !== 11) {
-    alert('CPF inválido. Digite 11 números.');
-    return;
+  if (!validarCPF(cpf)) {
+    alert('CPF inválido!');
+  } else {
+    liberarFormulario(); // Habilita os campos
   }
-
-  fetch(`/api/verify-cpf?cpf=${cpf}`)
-    .then(res => {
-      if (!res.ok) throw new Error('CPF não encontrado!');
-      return res.json();
-    })
-    .then(data => {
-      // Se a API retornou algo, consideramos válido
-      liberarFormularioCPF();
-    })
-    .catch(err => {
-      alert(err.message || 'Erro ao verificar o CPF.');
-      console.error(err);
-    });
 }
 
-function liberarFormularioCPF() {
+function validarCPF(cpf) {
+  cpf = cpf.replace(/[^\d]+/g, ''); // Remove tudo que não for número
+
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+  let soma = 0;
+  for (let i = 0; i < 9; i++) {
+    soma += parseInt(cpf.charAt(i)) * (10 - i);
+  }
+  let resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.charAt(9))) return false;
+
+  soma = 0;
+  for (let i = 0; i < 10; i++) {
+    soma += parseInt(cpf.charAt(i)) * (11 - i);
+  }
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+
+  return resto === parseInt(cpf.charAt(10));
+}
+
+function liberarFormulario() {
   const formElements = document.querySelectorAll('form input, form select, form button');
   formElements.forEach(el => {
     if (el.id !== 'cpf') {
@@ -30,12 +40,3 @@ function liberarFormularioCPF() {
     }
   });
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  const formElements = document.querySelectorAll('form input, form select, form button');
-  formElements.forEach(el => {
-    if (el.id !== 'cpf') {
-      el.setAttribute('disabled', 'true');
-    }
-  });
-});
