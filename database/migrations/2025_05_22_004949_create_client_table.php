@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('sobrenome');
             $table->date('nascimento');
-            $table->integer('telefone');
+            $table->string('telefone');
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@
             </div>
         </footer>
 
+        @yield('scripts')
         <x-scripts />
     </body>
 </html>

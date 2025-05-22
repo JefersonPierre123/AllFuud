@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome_unidade');
             $table->string('categoria');
             $table->decimal('classificacao');
-            $table->integer('telefone');
+            $table->string('telefone');
             $table->string('email_contato')->unique();
             $table->string('cep');
             $table->string('estado');
