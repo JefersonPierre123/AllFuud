@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_address', function (Blueprint $table) {
+        Schema::create('delivery_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clientId')->constrained('client')->onDelete('cascade')->nullable();
+            $table->foreignId('clientId')->constrained('clients')->onDelete('cascade')->nullable();
             $table->string('cep');
             $table->string('estado');
             $table->string('cidade');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_address');
+        Schema::dropIfExists('delivery_addresses');
     }
 };
