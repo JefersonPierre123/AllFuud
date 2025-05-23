@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('establishments', function (Blueprint $table) {
             $table->id();
+            $table->string('imagem');
             $table->string('cnpj')->unique();
             $table->string('nome_franquia');
             $table->string('nome_unidade');
             $table->string('categoria');
+            $table->string('descricao');
             $table->decimal('classificacao');
             $table->string('telefone');
             $table->string('email_contato')->unique();

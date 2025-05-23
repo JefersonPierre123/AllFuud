@@ -12,6 +12,7 @@ class Establishment extends Model
     protected $table = 'establishments';
 
     protected $fillable = [
+        'imagem',
         'cnpj',
         'nome_franquia',
         'nome_unidade',

@@ -4,6 +4,8 @@
 
         <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ $title }}</h5>
+            <h6 class="card-subtitle"> {{$subtitle}} </h6>
+            <p class="card-text"><strong>Categoria:</strong> {{ $category }}</p>
             <p class="card-text">{{ $description }}</p>
 
             <div class="mb-3">
