@@ -28,5 +28,10 @@ class Establishment extends Model
         'numero',
         'complemento',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
 

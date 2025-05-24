@@ -16,18 +16,18 @@
     </div>
 </div>
 
-{{-- <div class="container mt-5">
+<div class="container mt-5">
     <div class="row">
         @foreach($products as $product)
                 <x-card-product                     
-                    :image="$product['image']"
-                    :title="$product['title']"
-                    :description="$product['description']"
-                    :price="$product['price']" 
+                    :image="$product['imagem']"
+                    :title="$product['nome']"
+                    :description="$product['descricao']"
+                    :price="$product['valor']" 
                 />
         @endforeach
     </div>
-</div> --}}
+</div>
 
 <x-user-registration-form />
 <x-establishment-registration-form />

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Establishment;
+use App\Models\Product;
 
 
 class HomeController extends Controller
@@ -16,8 +17,10 @@ class HomeController extends Controller
     public function index()
     {
         $establishments = Establishment::all();
+
+        $products = Product::all();
         
-        return view('welcome', compact('establishments'));
+        return view('welcome', compact('establishments', 'products'));
     }
 
     /**
