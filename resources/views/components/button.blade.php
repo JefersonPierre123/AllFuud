@@ -2,16 +2,36 @@
     'type' => 'button',
     'variant' => 'primary',
     'disabled' => false,
-    'icon' => null
+    'icon' => null,
+    'href' => null,
 ])
 
-<button
-    type="{{ $type }}"
-    {{ $disabled ? 'disabled' : '' }}
-    {{ $attributes->merge(['class' => "btn btn-$variant"]) }}
->
-    @if($icon)
-        <i class="{{ $icon }}"></i>
-    @endif
-    {{ $slot }}
-</button>
+@php
+    $classes = "btn btn-$variant";
+    if ($disabled) {
+        $classes .= ' disabled';
+    }
+@endphp
+
+@if($href)
+    <a
+        href="{{ $href }}"
+        {{ $attributes->merge(['class' => $classes]) }}
+    >
+        @if($icon)
+            <i class="{{ $icon }}"></i>
+        @endif
+        {{ $slot }}
+    </a>
+@else
+    <button
+        type="{{ $type }}"
+        {{ $disabled ? 'disabled' : '' }}
+        {{ $attributes->merge(['class' => $classes]) }}
+    >
+        @if($icon)
+            <i class="{{ $icon }}"></i>
+        @endif
+        {{ $slot }}
+    </button>
+@endif
