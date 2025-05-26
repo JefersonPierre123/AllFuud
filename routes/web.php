@@ -15,3 +15,7 @@ Route::prefix('establishments')->name('establishments.')->group(function () {
     Route::put('/{id}', [EstablishmentController::class, 'update'])->name('update');
     Route::delete('/{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
 });
+
+Route::get('/login', function () {
+    return view('components.login');
+})->name('login');
