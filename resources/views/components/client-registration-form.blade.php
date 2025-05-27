@@ -1,5 +1,7 @@
 <div class="card card-custom">
-    <form action="#" class="container mt-4">
+    <form action="{{ route('clients.store') }}" method="POST" class="container mt-4">
+        @csrf
+
         <h2 class="text-dark mb-4"><i class="bi bi-person-fill-add me-2"></i>Cadastro de Cliente</h2>
     
         {{-- Grupo: Dados Pessoais --}}
@@ -27,19 +29,35 @@
             </div>
         </div>
     
-        <hr class="my-4">
-    
-        {{-- Grupo: Endereço --}}
-        <div class="form-section-title"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</div>
-        {{-- <x-address-registration-form /> --}}
-    
         <div class="mt-4">
             <x-button variant="primary" type="submit" size="lg">
-                <i class="bi bi-send-fill me-1"></i> Cadastrar
+                <i class="bi bi-send-fill me-1"></i> Cadastrar Dados Pessoais
             </x-button>
         </div>
     </form>
 </div>
+
+@if(session('client_id'))
+    <div class="card card-custom">
+        <form action="{{ route('addresses.store') }}" method="POST" class="container mt-4">
+            @csrf
+
+            <h2 class="text-dark mb-4"><i class="bi bi-person-fill-add me-2"></i>Cadastro de Endereço</h2>
+
+            <input type="hidden" id="client_id" name="client_id" value="{{ session('client_id') }}">
+            
+            {{-- Grupo: Endereço --}}
+            <div class="form-section-title"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</div>
+                <x-address-registration-form />
+        
+            <div class="mt-4">
+                <x-button variant="primary" type="submit" size="lg">
+                    <i class="bi bi-send-fill me-1"></i> Cadastrar Endereço
+                </x-button>
+            </div>
+        </form>
+    </div>
+@endif
 
 @push('scripts')
     <script src="{{ asset('js/cpf.js') }}"></script>

@@ -1,5 +1,5 @@
 <label for="state" class="form-label">Estado</label>
-<select name="state" id="state" class="form-control" required disabled>
+<select name="state" id="state" class="form-control" required readonly>
     <option value="">Selecione um estado</option>
     <option value="AC">Acre</option>
     <option value="AL">Alagoas</option>
