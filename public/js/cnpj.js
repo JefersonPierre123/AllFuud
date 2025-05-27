@@ -18,7 +18,7 @@ function verificarCNPJ() {
         return;
       }
 
-      if (data.status === 'OK' && data.situacao === 'ATIVA') {
+      if (data.status === 'OK') {
         liberarFormulario();
       } else {
         alert(`CNPJ inválido! Status: ${data.status}, Situação: ${data.situacao}`);
@@ -31,7 +31,7 @@ function verificarCNPJ() {
 }
 
 function liberarFormulario() {
-  const formElements = document.querySelectorAll('form input, form select, form button');
+  const formElements = document.querySelectorAll('form input, form select, form button, form textarea');
   formElements.forEach(el => {
     if (el.id !== 'cnpj') {
       el.removeAttribute('disabled');

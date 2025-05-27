@@ -12,11 +12,11 @@
     </div>
     <div class="col-md-8">
         <label for="neighborhood" class="form-label">Bairro</label>
-        <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Bairro" required disabled>
+        <input type="text" name="neighborhood" id="neighborhood" class="form-control" required disabled>
     </div>
     <div class="col-md-8">
         <label for="street" class="form-label">Endereço</label>
-        <input type="text" name="street" id="street" class="form-control" placeholder="Endereço" required disabled>
+        <input type="text" name="street" id="street" class="form-control" required disabled>
     </div>
     <div class="col-md-8">
         <label for="number" class="form-label">Número</label>
@@ -28,6 +28,6 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script src="{{ asset('js/cep.js') }}"></script>
-@endsection
+@endpush

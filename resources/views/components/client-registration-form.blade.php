@@ -31,7 +31,7 @@
     
         {{-- Grupo: Endereço --}}
         <div class="form-section-title"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</div>
-        <x-address-registration-form />
+        {{-- <x-address-registration-form /> --}}
     
         <div class="mt-4">
             <x-button variant="primary" type="submit" size="lg">
@@ -41,6 +41,6 @@
     </form>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script src="{{ asset('js/cpf.js') }}"></script>
-@endsection
+@endpush

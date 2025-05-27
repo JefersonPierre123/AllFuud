@@ -6,15 +6,15 @@
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required disabled>
+                <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
             </div>
             <div class="col-md-6">
                 <label for="password" class="form-label">Senha</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required disabled>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required>
             </div>
             <div class="col-md-6">
                 <label for="confirm_password" class="form-label">Confirmar Senha</label>
-                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirme a Senha" required disabled>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirme a Senha" required>
             </div>
         </div>    
         <div class="mt-4">

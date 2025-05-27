@@ -23,7 +23,7 @@
             </div>
         </footer>
 
-        @yield('scripts')
+        @stack('scripts')
         <x-scripts />
     </body>
 </html>

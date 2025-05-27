@@ -16,6 +16,7 @@ class Establishment extends Model
         'cnpj',
         'nome_franquia',
         'nome_unidade',
+        'descricao',
         'categoria',
         'classificacao',
         'telefone',

@@ -1,6 +1,8 @@
 <div class="card card-custom">
-    <form action="#" class="container mt-4">
-        <h2 class="text-danger mb-4">Cadastro de Estabelecimentos</h2>
+    <form action="{{ route('establishments.store') }}" method="POST" enctype="multipart/form-data" class="container mt-4">
+        @csrf
+
+        <h2 class="mb-4">Cadastro de Estabelecimentos</h2>
     
         {{-- Grupo: Dados do Estabelecimento --}}
         <div class="form-section-title"><i class="bi bi-card-list me-2"></i>Dados do Estabelecimento</div>
@@ -16,6 +18,17 @@
             <div class="col-md-6">
                 <label for="unit_name" class="form-label">Nome da Unidade</label>
                 <input type="text" name="unit_name" id="unit_name" class="form-control" placeholder="Nome da Unidade" required disabled>
+            </div>
+            <div class="col-md-6">
+                <label for="description" class="form-label">Descrição</label>
+                <textarea name="description" id="description" class="form-control" placeholder="Descreva seu estabelecimento" required disabled></textarea>
+            </div>
+            <div class="col-md-6">
+                <label for="image" class="form-label">Imagem do Estabelecimento</label>
+                <input type="file" name="image" id="image" class="form-control" accept="image/*">
+            </div>
+            <div class="col-md-6">
+                <x-select-category />
             </div>
             <div class="col-md-6">
                 <label for="phone" class="form-label">Telefone</label>
@@ -40,6 +53,6 @@
     </form>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script src="{{ asset('js/cnpj.js') }}"></script>
-@endsection
+@endpush
