@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <h2 class="mb-4">Login</h2>
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('login.submit') }}">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
@@ -19,6 +19,11 @@
         <div class="mt-3 text-center">
             <a href="{{ route('index') }}">Não tem uma conta? Registre-se</a>
         </div>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                {{ $errors->first() }}
+            </div>
+        @endif
     </div>
 </div>
 @endsection

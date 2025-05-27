@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EstablishmentController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,6 +17,5 @@ Route::prefix('establishments')->name('establishments.')->group(function () {
     Route::delete('/{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
 });
 
-Route::get('/login', function () {
-    return view('components.login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
