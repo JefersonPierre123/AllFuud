@@ -1,6 +1,6 @@
 <div class="card card-custom">
     <form action="#" class="container mt-4">
-        <h2 class="text-dark mb-4"><i class="bi bi-person-fill-add me-2"></i>Cadastro de Usuário</h2>
+        <h2 class="text-danger mb-4"><i class="bi bi-person-fill-add me-2"></i>Cadastro de Usuário</h2>
     
         {{-- Grupo: Dados Pessoais --}}
         <div class="form-section-title"><i class="bi bi-card-list me-2"></i>Dados Pessoais</div>
@@ -53,9 +53,7 @@
         <x-address-registration-form />
     
         <div class="mt-4">
-            <x-button variant="primary" type="submit" size="lg">
-                <i class="bi bi-send-fill me-1"></i> Cadastrar
-            </x-button>
+            <x-button variant="danger" type="submit" size="lg">Cadastrar</x-button>
         </div>
     </form>
 </div>

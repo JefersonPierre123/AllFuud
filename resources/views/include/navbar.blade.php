@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">🍔 AllFuud</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -6,10 +6,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Cardápio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Carrinho</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Perfil</a></li>
+                <li class="nav-item">
+                     <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-1"></i>Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-journal-text me-1"></i>Cardápio</a>                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i>Perfil</a>
+                </li>
             </ul>
         </div>
     </div>
