@@ -1,3 +1,6 @@
+@import url(registration-form.css);
+@import url(navbar.css);
+
 body {
     padding-top: 56px;
     padding-bottom: 60px;
