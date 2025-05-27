@@ -18,5 +18,6 @@
 </div>
 
 <x-user-registration-form />
+<x-client-registration-form />
 <x-establishment-registration-form />
 @endsection
