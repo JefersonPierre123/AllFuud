@@ -1,0 +1,52 @@
+.card-establishment {
+    max-width: 100%;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center center;
+}
+
+.card-establishment:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+.establishment-img {
+    object-fit: contain;
+    height: 180px;
+    width: 100%;
+}
+
+.col-img {
+    max-width: 100px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 0.75rem 1rem;
+}
+
+.card-title {
+    font-size: 1.10rem;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.card-subtitle {
+    font-size: 0.85rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #444;
+}

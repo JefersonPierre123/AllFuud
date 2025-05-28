@@ -1,23 +1,23 @@
- .navbar-custom {
-      background: linear-gradient(90deg, #e53935, #d32f2f);
-      box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
-    }
+.navbar-custom {
+    background: linear-gradient(90deg, #e53935, #d32f2f);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+}
 
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 
-    .nav-link {
-      color: #fff !important;
-      font-weight: 500;
-      margin-left: 1rem;
-    }
+.nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin-left: 1rem;
+}
 
-    .nav-link:hover {
-      color: #680b0b !important;
-    }
+.nav-link:hover {
+    color: #680b0b !important;
+}
 
-    .navbar-toggler {
-      border: none;
-    }
+.navbar-toggler {
+    border: none;
+}

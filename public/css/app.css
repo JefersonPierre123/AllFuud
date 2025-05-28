@@ -1,10 +1,17 @@
 @import url(registration-form.css);
 @import url(navbar.css);
+@import url(card-establishment.css);
+@import url(button.css);
+
+.container {
+    max-width: 1250px !important;
+}
 
 body {
     padding-top: 56px;
     padding-bottom: 60px;
 }
+
 footer {
     position: fixed;
     bottom: 0;
