@@ -10,13 +10,28 @@
                      <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-1"></i>Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-journal-text me-1"></i>Cardápio</a>                </li>
+                    <a class="nav-link" href="#"><i class="bi bi-journal-text me-1"></i>Cardápio</a>                
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i>Perfil</a>
-                </li>
+                @php
+                    $user = Auth::user();
+                    $isClient = $user && $user->client_id;
+                    $isEstablishment = $user && $user->establishment_id;
+                
+                    $clientName = $isClient ? \App\Models\Client::find($user->client_id)?->nome : null;
+                    $establishmentName = $isEstablishment ? \App\Models\Establishment::find($user->establishment_id)?->nome_unidade : null;
+                @endphp
+            
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-circle me-1"></i>
+                            {{ $clientName ?? $establishmentName ?? Auth::user()->email }}
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
