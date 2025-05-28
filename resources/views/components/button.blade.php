@@ -7,7 +7,10 @@
 ])
 
 @php
-    $classes = "btn btn-$variant";
+    $classes = $variant === 'invisible'
+        ? 'invisible-button'
+        : "btn btn-$variant";
+
     if ($disabled) {
         $classes .= ' disabled';
     }

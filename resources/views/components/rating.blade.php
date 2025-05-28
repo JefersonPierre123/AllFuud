@@ -5,7 +5,7 @@
     $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
 @endphp
 
-<div class="mb-3">
+<div>
     <span class="card-text">
 
         {{-- Estrelas cheias --}}
