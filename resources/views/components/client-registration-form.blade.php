@@ -34,7 +34,7 @@
         <x-address-registration-form />
     
         <div class="mt-4">
-            <x-button variant="danger" type="submit" size="lg">
+            <x-button variant="primary" type="submit" size="lg">
                 <i class="bi bi-send-fill me-1"></i> Cadastrar
             </x-button>
         </div>
