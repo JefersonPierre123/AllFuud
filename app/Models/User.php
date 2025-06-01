@@ -47,4 +47,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function establishment()
+    {
+        return $this->belongsTo(Establishment::class);
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        if ($this->client_id && $this->client) {
+            return $this->client->nome;
+        }
+
+        if ($this->establishment_id && $this->establishment) {
+            return $this->establishment->nome_unidade;
+        }
+
+        return $this->email;
+    }
 }

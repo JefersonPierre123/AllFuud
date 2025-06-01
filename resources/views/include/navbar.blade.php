@@ -15,20 +15,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
                 </li>
-                @php
-                    $user = Auth::user();
-                    $isClient = $user && $user->client_id;
-                    $isEstablishment = $user && $user->establishment_id;
-                
-                    $clientName = $isClient ? \App\Models\Client::find($user->client_id)?->nome : null;
-                    $establishmentName = $isEstablishment ? \App\Models\Establishment::find($user->establishment_id)?->nome_unidade : null;
-                @endphp
             
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('profile.index') }}">
                             <i class="bi bi-person-circle me-1"></i>
-                            {{ $clientName ?? $establishmentName ?? Auth::user()->email }}
+                            {{ $clientName ?? $establishmentName ?? $authUser?->email }}
                         </a>
                     </li>
                 @endauth

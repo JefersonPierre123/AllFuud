@@ -26,3 +26,10 @@ function buscarEndereco() {
       alert('Erro ao buscar o CEP.');
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const cepInput = document.getElementById('cep');
+  if (cepInput && cepInput.value.replace(/\D/g, '').length === 8) {
+    buscarEndereco();
+  }
+});

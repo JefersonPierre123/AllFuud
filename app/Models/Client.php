@@ -19,7 +19,7 @@ class Client extends Model
         'telefone',
     ];
 
-    public function Adresses()
+    public function adresses()
     {
         return $this->hasMany(Address::class);
     }
