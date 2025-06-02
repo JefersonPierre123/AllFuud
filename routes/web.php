@@ -17,6 +17,8 @@ Route::middleware( 'auth' )->prefix('establishments')->name('establishments.')->
     Route::delete('/{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
 });
 
+Route::get('establishments/{id}/show', [EstablishmentController::class, 'show'])->name('establishments.show');
+
 Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function () {
     Route::post('/store', [ClientController::class, 'store'])->name('store');
     Route::put('/{id}', [ClientController::class, 'update'])->name('update');
