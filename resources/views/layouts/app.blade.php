@@ -19,7 +19,7 @@
         <!-- Rodapé -->
         <footer class="text-center">
             <div class="container">
-                <span class="text-muted">© 2025 AllFuud - Todos os direitos reservados.</span>
+                <span class="text-muted">Projeto WEB desenvolvido como trabalho avaliativo para a matéria de Front End</span>
             </div>
         </footer>
 

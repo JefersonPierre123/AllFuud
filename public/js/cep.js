@@ -1,6 +1,5 @@
 function buscarEndereco() {
   const cep = document.getElementById('cep')?.value?.replace(/\D/g, '');
-  console.log('CEP capturado:', cep);
 
   if (!cep || cep.length !== 8) {
     alert('CEP inválido. Digite 8 números.');
@@ -26,10 +25,3 @@ function buscarEndereco() {
       alert('Erro ao buscar o CEP.');
     });
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  const cepInput = document.getElementById('cep');
-  if (cepInput && cepInput.value.replace(/\D/g, '').length === 8) {
-    buscarEndereco();
-  }
-});

@@ -3,6 +3,7 @@
     'method' => 'POST',
     'routeParams' => [],
     'client' => null,
+    'clientId' => null,
 ])
 
 <div class="card card-custom">
@@ -94,20 +95,42 @@
 </div>
 
 @if($client)
-    @if($method === 'PUT')
-        <x-address-registration-form 
-        routeSuffix="update" 
-        method="PUT" 
-        :routeParams="[$authUser->client_id]" 
-        :addresses="$client->adresses"/>
-    @elseif($method === 'POST')
-        <x-address-registration-form 
-        routeSuffix="store" 
-        method="POST" 
-        :routeParams="[]" />
-    @endif
+    <div id="address-list-container">
+        <div class="mt-4">
+            <x-button 
+                variant="success" 
+                size="lg" 
+                onclick="loadNewAddressForm({{ $clientId }})"
+            >
+                <i class="bi bi-plus-circle-fill me-2"></i> Novo Endereço
+            </x-button>
+        </div>
+        <div id="new-address-form-container" class="mt-4"></div>
+        @if(!empty($client->addresses))
+            <div class="row">
+                @foreach($client->addresses as $address)
+                    <div class="col-md-6 mb-4" id="card-address-wrapper-{{ $address->id }}">
+                        <div id="card-address-{{ $address->id }}" class="card card-custom">
+                            <x-card-address :address="$address" />
+                        </div>
+                        <div id="address-form-container-{{ $address->id }}" class="mt-3 d-none"></div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="alert alert-info mt-3" id="no-address-alert">
+                Nenhum endereço cadastrado no momento.
+            </div>
+        @endif
+    </div>
 @endif
 
+
 @push('scripts')
+    <script>
+        window.addressFormBaseUrl = "{{ url('profile/addresses/form') }}";
+    </script>
     <script src="{{ asset('js/cpf.js') }}"></script>
+    <script src="{{ asset('js/render-address-form-container.js')}}"></script>
+    <script src="{{ asset('js/cep.js') }}"></script>
 @endpush

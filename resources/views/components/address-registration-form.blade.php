@@ -2,12 +2,8 @@
     'routeSuffix',
     'method' => 'POST',
     'routeParams' => [],
-    'addresses' => null,
+    'address' => null,
 ])
-
-@php
-    $address = is_iterable($addresses) ? $addresses->last() : $addresses;
-@endphp
 
 <div class="card card-custom">
     <form action="{{ route('addresses.' . $routeSuffix, $routeParams) }}" method="{{ strtoupper($method) }}" class="container mt-4">
@@ -70,10 +66,9 @@
             <x-button variant="primary" type="submit" size="lg">
                 <i class="bi bi-send-fill me-1"></i> @if($method === 'POST') Cadastrar @else Atualizar @endif Endereço
             </x-button>
+            <x-button variant="secondary" size="lg"  onclick="closeAddressForm()">
+                <i class="bi bi-x-circle me-1"></i> Cancelar
+            </x-button>
         </div>
     </form>
 </div>
-
-@push('scripts')
-    <script src="{{ asset('js/cep.js') }}"></script>
-@endpush

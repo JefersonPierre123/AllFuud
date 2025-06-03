@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('index')->get('/', [HomeController::class, 'index']);
 
-Route::middleware( 'auth' )->prefix('establishments')->name('establishments.')->group(function () {
-    Route::post('/store', [EstablishmentController::class, 'store'])->name('store');
-    Route::put('/{id}', [EstablishmentController::class, 'update'])->name('update');
-    Route::delete('/{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
+Route::prefix('establishments')->name('establishments.')->group(function () {
+    Route::get('{id}/show', [EstablishmentController::class, 'show'])->name('show');
+    Route::middleware('auth')->group(function () {
+        Route::post('store', [EstablishmentController::class, 'store'])->name('store');
+        Route::put('{id}', [EstablishmentController::class, 'update'])->name('update');
+        Route::delete('{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
+    });
 });
-
-Route::get('establishments/{id}/show', [EstablishmentController::class, 'show'])->name('establishments.show');
 
 Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function () {
     Route::post('/store', [ClientController::class, 'store'])->name('store');
@@ -25,17 +26,37 @@ Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function
     Route::delete('/{id}', [ClientController::class, 'destroy'])->name('destroy');
 });
 
-Route::middleware( 'auth' )->prefix('addresses')->name('addresses.')->group(function () {
+
+
+
+Route::middleware('auth')->prefix('profile/addresses')->name('addresses.')->group(function () {
     Route::post('/store', [AddressController::class, 'store'])->name('store');
     Route::put('/{id}', [AddressController::class, 'update'])->name('update');
     Route::delete('/{id}', [AddressController::class, 'destroy'])->name('destroy');
+    Route::get('/form/create', function () {
+        return view('components.address-registration-form', [
+            'routeSuffix' => 'store',
+            'method' => 'POST',
+            'routeParams' => [],
+            'address' => null,
+        ])->render();
+    })->name('form.create');
+    Route::get('/form/{addressId}', function ($addressId) {
+        $address = \App\Models\Address::findOrFail($addressId);
+        return view('components.address-registration-form', [
+            'routeSuffix' => 'update',
+            'method' => 'PUT',
+            'routeParams' => [$address->id],
+            'address' => $address,
+        ])->render();
+    })->name('form.edit');
 });
+
 
 
 
 Route::middleware( 'auth' )->prefix('profile')->name('profile.')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
-    Route::put('/{id}', [ProfileController::class, 'updateProfile'])->name('update');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
