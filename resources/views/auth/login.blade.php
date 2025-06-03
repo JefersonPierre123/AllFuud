@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
         </form>
         <div class="mt-3 text-center">
-            <a href="{{ route('index') }}">Não tem uma conta? Registre-se</a>
+            <a href="{{ route('register') }}">Não tem uma conta? Registre-se</a>
         </div>
         @if($errors->any())
             <div class="alert alert-danger">

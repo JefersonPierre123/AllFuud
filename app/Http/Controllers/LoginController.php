@@ -9,15 +9,12 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        echo $credentials['email'];
-        echo $credentials['password'];
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...

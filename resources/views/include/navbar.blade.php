@@ -23,6 +23,12 @@
                             {{ $clientName ?? $establishmentName ?? $authUser?->email }}
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" class="">
+                            @csrf
+                            <button type="submit" class="nav-link d-inline">Sair</button>
+                        </form>
+                    </li>
                 @elseguest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">
