@@ -18,7 +18,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended(route('index'));
+            return redirect()->intended(route('profile.index'));
         }
 
         return back()->withErrors([

@@ -8,7 +8,7 @@
 <div class="card card-custom">
     
 
-    <form action="{{ route('establishments.' . $routeSuffix, $routeParams) }}" method="{{ strtoupper($method) }}" class="container mt-4">
+    <form action="{{ route('establishments.' . $routeSuffix, $routeParams) }}" method="{{ strtoupper($method) }}" class="container mt-4" enctype="multipart/form-data">
 
     @if (in_array(strtoupper($method), ['PUT', 'PATCH']))
         @method($method)

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Establishment;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class EstablishmentController extends Controller
 {
@@ -82,10 +84,26 @@ class EstablishmentController extends Controller
                 ]);
             }
     
+            if (Auth::check()) {
+                /** @var \App\Models\User $user */
+                $user = Auth::user();
+                $user->establishment_id = $establishment->id;
+                $user->save();
+            }
+    
             return redirect()->back()->with('success', 'Estabelecimento cadastrado com sucesso!');
             
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()
+                    ->with('error', 'O CNPJ informado já está cadastrado.');
+            }
+    
+            return redirect()->back()
+                ->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Erro inesperado: ' . $e->getMessage());
         }
     }
 

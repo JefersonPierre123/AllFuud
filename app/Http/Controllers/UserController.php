@@ -28,14 +28,18 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        auth()->login($user);
+        /** @var \Illuminate\Contracts\Auth\StatefulGuard $guard */
+        $guard = auth();
+        $guard->login($user);
 
-        return redirect()->route('welcome')->with('success', 'Registro realizado com sucesso! Você está logado.');
+        return redirect()->route('index')->with('success', 'Registro realizado com sucesso! Você está logado.');
     }
 
     public function logout(Request $request)
     {
-        auth()->logout();
+        /** @var \Illuminate\Contracts\Auth\StatefulGuard $guard */
+        $guard = auth();
+        $guard->logout();
         return redirect()->route('index')->with('success', 'Você foi desconectado com sucesso.');
     }
 }

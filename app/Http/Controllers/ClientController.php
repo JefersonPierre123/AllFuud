@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Client;	
+use Illuminate\Database\QueryException;
 
 class ClientController extends Controller
 {
@@ -44,14 +46,27 @@ class ClientController extends Controller
                 'nascimento' => $request->birth_date,
                 'telefone' => $request->phone,
             ]);
-
-            $clientId = $client->id;
     
-            return redirect()->back()->with('success', 'Cliente cadastrado com sucesso!')
-                                     ->with('client_id', $client->id);
+            if (Auth::check()) {
+                /** @var \App\Models\User $user */
+                $user = Auth::user();
+                $user->client_id = $client->id;
+                $user->save();
+            }
+    
+            return redirect()->back()->with('success', 'Cliente cadastrado com sucesso!');
             
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()
+                    ->with('error', 'O CPF informado já está cadastrado.');
+            }
+    
+            return redirect()->back()
+                ->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Erro inesperado: ' . $e->getMessage());
         }
     }
 
