@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
+<div class="d-flex align-items-center justify-content-center py-5">
     <div class="col-md-4">
         <h2 class="mb-4">Login</h2>
         <form method="POST" action="{{ route('login.submit') }}">

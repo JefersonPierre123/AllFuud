@@ -9,14 +9,13 @@
                 <li class="nav-item">
                      <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-1"></i>Início</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-journal-text me-1"></i>Cardápio</a>                
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
-                </li>
-            
+                </li> --}}
                 @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('profile.index') }}">
                             <i class="bi bi-person-circle me-1"></i>
@@ -33,6 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">
                             <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">
+                            Criar Conta
                         </a>
                     </li>
                 @endauth

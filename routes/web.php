@@ -28,9 +28,6 @@ Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function
     Route::delete('/{id}', [ClientController::class, 'destroy'])->name('destroy');
 });
 
-
-
-
 Route::middleware('auth')->prefix('profile/addresses')->name('addresses.')->group(function () {
     Route::post('/store', [AddressController::class, 'store'])->name('store');
     Route::put('/{id}', [AddressController::class, 'update'])->name('update');
@@ -53,9 +50,6 @@ Route::middleware('auth')->prefix('profile/addresses')->name('addresses.')->grou
         ])->render();
     })->name('form.edit');
 });
-
-
-
 
 Route::middleware( 'auth' )->prefix('profile')->name('profile.')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');

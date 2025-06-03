@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('auth.user-registration-form');
+        return view('auth.registration');
     }
 
     public function store(Request $request)
