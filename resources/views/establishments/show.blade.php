@@ -4,6 +4,13 @@
 
     <div class="container mt-5">
         <div class="row">
+            @if ($products->isEmpty())
+                <div class="col-12">
+                    <div class="alert alert-info" role="alert">
+                        Nenhum produto encontrado para este estabelecimento.
+                    </div>
+                </div>
+            @endif
             @foreach($products as $product)
                     <x-card-product                     
                         :image="$product['imagem']"
