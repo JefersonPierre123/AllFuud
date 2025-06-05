@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Models\Establishment;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\QueryException;
 
 class EstablishmentController extends Controller
 {
@@ -34,7 +32,7 @@ class EstablishmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cnpj' => 'required|string|max:18|unique:establishments, cnpj',
+            'cnpj' => 'required|string|max:18|unique:establishments,cnpj',
             'name' => 'required|string|max:255',
             'unit_name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
@@ -92,15 +90,7 @@ class EstablishmentController extends Controller
             }
     
             return redirect()->back()->with('success', 'Estabelecimento cadastrado com sucesso!');
-            
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return redirect()->back()
-                    ->with('error', 'O CNPJ informado já está cadastrado.');
-            }
-    
-            return redirect()->back()
-                ->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
+        
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Erro inesperado: ' . $e->getMessage());
@@ -135,7 +125,57 @@ class EstablishmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'imagem' => $request->hasFile('image') ? 'image|max:2048' : 'nullable',
+            'cnpj' => 'required|string|max:18',
+            'name' => 'required|string|max:255',
+            'unit_name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'category' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:20',
+            'contact_email' => 'required|email|max:255|unique:establishments,email_contato,' . $id,
+            'cep' => 'nullable|string|max:20',
+            'state' => 'nullable|string|max:50',
+            'city' => 'nullable|string|max:100',
+            'neighborhood' => 'nullable|string|max:100',
+            'street' => 'nullable|string|max:255',
+            'number' => 'nullable|string|max:10',
+            'complement' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
+        ]);
+    
+        try {    
+            $establishment = Establishment::findOrFail($id);
+
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $imageName = 'estabelecimento-' . $establishment->id . '.' . $extension;
+    
+            $request->file('image')->storeAs('images/establishments', $imageName, 'public');
+    
+            $establishment->update([
+                'imagem' => $imageName,
+                'cnpj' => $request->cnpj,
+                'nome_franquia' => $request->name,
+                'nome_unidade' => $request->unit_name,
+                'descricao' => $request->description,
+                'categoria' => $request->category,
+                'telefone' => $request->phone,
+                'email_contato' => $request->contact_email,
+                'cep' => $request->cep,
+                'estado' => $request->state,
+                'cidade' => $request->city,
+                'bairro' => $request->neighborhood,
+                'endereco' => $request->street,
+                'numero' => $request->number,
+                'complemento' => $request->complement,
+            ]);
+    
+            return redirect()->back()->with('success', 'Estabelecimento atualizado com sucesso!');
+    
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Erro inesperado: ' . $e->getMessage());
+        }
     }
 
     /**

@@ -28,7 +28,7 @@ Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function
     Route::delete('/{id}', [ClientController::class, 'destroy'])->name('destroy');
 });
 
-Route::middleware('auth')->prefix('profile/addresses')->name('addresses.')->group(function () {
+Route::middleware('auth')->prefix('addresses')->name('addresses.')->group(function () {
     Route::post('/store', [AddressController::class, 'store'])->name('store');
     Route::put('/{id}', [AddressController::class, 'update'])->name('update');
     Route::delete('/{id}', [AddressController::class, 'destroy'])->name('destroy');

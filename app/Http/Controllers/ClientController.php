@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;	
-use Illuminate\Database\QueryException;
 
 class ClientController extends Controller
 {
@@ -56,14 +55,6 @@ class ClientController extends Controller
     
             return redirect()->back()->with('success', 'Cliente cadastrado com sucesso!');
             
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return redirect()->back()
-                    ->with('error', 'O CPF informado já está cadastrado.');
-            }
-    
-            return redirect()->back()
-                ->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Erro inesperado: ' . $e->getMessage());
@@ -91,7 +82,31 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'cpf' => 'required|string|max:18',
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'birth_date' => 'nullable|date|max:1000',
+            'phone' => 'required|string|max:20',
+        ]);
+    
+        try {
+            $client = Client::findOrFail($id);
+    
+            $client->update([
+                'cpf' => $request->cpf,
+                'nome' => $request->name,
+                'sobrenome' => $request->surname,
+                'nascimento' => $request->birth_date,
+                'telefone' => $request->phone,
+            ]);
+    
+            return redirect()->back()->with('success', 'Cliente atualizado com sucesso!');
+    
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Erro inesperado: ' . $e->getMessage());
+        }
     }
 
     /**

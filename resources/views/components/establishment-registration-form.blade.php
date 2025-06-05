@@ -8,7 +8,7 @@
 <div class="card card-custom">
     
 
-    <form action="{{ route('establishments.' . $routeSuffix, $routeParams) }}" method="{{ strtoupper($method) }}" class="container mt-4" enctype="multipart/form-data">
+    <form action="{{ route('establishments.' . $routeSuffix, $routeParams) }}" method="POST" class="container mt-4" enctype="multipart/form-data">
 
     @if (in_array(strtoupper($method), ['PUT', 'PATCH']))
         @method($method)
@@ -31,7 +31,7 @@
                     value="{{ old('cnpj', $establishment->cnpj ?? '') }}"
                     onblur="verificarCNPJ()" 
                     required
-                    @if($method === 'PUT') disabled @endif
+                    @if($method === 'PUT') readonly @endif
                 >
             </div>
             <div class="col-md-6">

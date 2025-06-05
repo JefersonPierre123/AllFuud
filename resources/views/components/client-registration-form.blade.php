@@ -8,7 +8,7 @@
 
 <div class="card card-custom">
 
-    <form action="{{ route('clients.' . $routeSuffix, $routeParams) }}" method="{{ strtoupper($method) }}" class="container mt-4">
+    <form action="{{ route('clients.' . $routeSuffix, $routeParams) }}" method="POST" class="container mt-4">
 
     @if (in_array(strtoupper($method), ['PUT', 'PATCH']))
         @method($method)
@@ -31,7 +31,7 @@
                     value="{{ old('cpf', $client->cpf ?? '') }}"
                     onblur="verificarCPF()"
                     required
-                    @if($method === 'PUT') disabled @endif
+                    @if($method === 'PUT') readonly @endif
                 >
             </div>
             <div class="col-md-6">
@@ -128,7 +128,7 @@
 
 @push('scripts')
     <script>
-        window.addressFormBaseUrl = "{{ url('profile/addresses/form') }}";
+        window.addressFormBaseUrl = "{{ url('addresses/form') }}";
     </script>
     <script src="{{ asset('js/cpf.js') }}"></script>
     <script src="{{ asset('js/render-address-form-container.js')}}"></script>

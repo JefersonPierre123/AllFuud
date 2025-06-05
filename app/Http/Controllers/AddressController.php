@@ -79,7 +79,35 @@ class AddressController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'cep' => 'nullable|string|max:20',
+            'state' => 'nullable|string|max:50',
+            'city' => 'nullable|string|max:100',
+            'neighborhood' => 'nullable|string|max:100',
+            'street' => 'nullable|string|max:255',
+            'number' => 'nullable|string|max:10',
+            'complement' => 'nullable|string|max:255',
+        ]);
+
+        $address = Address::findOrFail($id);
+
+        try {
+            $address->update([
+                'client_id' => $request->client_id,
+                'cep' => $request->cep,
+                'estado' => $request->state,
+                'cidade' => $request->city,
+                'bairro' => $request->neighborhood,
+                'endereco' => $request->street,
+                'numero' => $request->number,
+                'complemento' => $request->complement,
+            ]);
+
+            return redirect()->back()->with('success', 'Endereço atualizado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao atualizar endereço: ' . $e->getMessage());
+        }
     }
 
     /**

@@ -38,3 +38,12 @@ function liberarFormulario() {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cnpjInput = document.getElementById('cnpj');
+  const cnpjValue = cnpjInput?.value?.replace(/\D/g, '');
+
+  if (cnpjValue && cnpjValue.length === 14) {
+    verificarCNPJ();
+  }
+});
