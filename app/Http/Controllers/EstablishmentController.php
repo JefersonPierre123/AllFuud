@@ -34,13 +34,13 @@ class EstablishmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cnpj' => 'required|string|max:18',
+            'cnpj' => 'required|string|max:18|unique:establishments, cnpj',
             'name' => 'required|string|max:255',
             'unit_name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
             'category' => 'nullable|string|max:255',
             'phone' => 'required|string|max:20',
-            'contact_email' => 'required|email|max:255',
+            'contact_email' => 'required|email|max:255|unique:establishments,email_contato',
             'cep' => 'nullable|string|max:20',
             'state' => 'nullable|string|max:50',
             'city' => 'nullable|string|max:100',

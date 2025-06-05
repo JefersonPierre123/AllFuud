@@ -31,7 +31,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cpf' => 'required|string|max:18',
+            'cpf' => 'required|unique:clients|string|max:18',
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'birth_date' => 'nullable|date|max:1000',
