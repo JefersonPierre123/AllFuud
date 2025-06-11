@@ -16,8 +16,4 @@
         @endforeach
     </div>
 </div>
-
-{{-- <x-user-registration-form /> --}}
-
-
 @endsection

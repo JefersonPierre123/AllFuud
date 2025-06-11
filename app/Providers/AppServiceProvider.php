@@ -24,34 +24,32 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $user = Auth::user();
-            $client = null;
-            $establishment = null;
-            $clientName = null;
-            $establishmentName = null;
-            $addresses = null;
-    
-            if ($user) {
-                if ($user->client_id) {
+            // Pega os dados que o Controller JÁ enviou para a View
+            $viewData = $view->getData();
+            
+            // Só executa a lógica de busca se o usuário estiver logado
+            if ($user = Auth::user()) {
+                $variablesToShare['authUser'] = $user;
+
+                // LÓGICA DO CLIENTE:
+                // Só busca o cliente do usuário se a view já não tiver uma variável 'client'
+                if ($user->client_id && !isset($viewData['client'])) {
                     $client = Client::find($user->client_id);
-                    $clientName = $client?->nome;
-                    $addresses = $client?->addresses;
+                    $variablesToShare['client'] = $client;
+                    $variablesToShare['clientName'] = $client?->nome;
+                    $variablesToShare['addresses'] = $client?->addresses;
                 }
-    
-                if ($user->establishment_id) {
+
+                // LÓGICA DO ESTABELECIMENTO:
+                // Só busca o estabelecimento do usuário se a view já não tiver uma variável 'establishment'
+                if ($user->establishment_id && !isset($viewData['establishment'])) {
                     $establishment = Establishment::find($user->establishment_id);
-                    $establishmentName = $establishment?->nome_unidade;
+                    $variablesToShare['establishment'] = $establishment;
+                    $variablesToShare['establishmentName'] = $establishment?->nome_unidade;
                 }
+                
+                $view->with($variablesToShare);
             }
-    
-            $view->with([
-                'authUser' => $user,
-                'client' => $client,
-                'establishment' => $establishment,
-                'clientName' => $clientName,
-                'establishmentName' => $establishmentName,
-                'addresses' => $addresses,
-            ]);
         });
     }
 }

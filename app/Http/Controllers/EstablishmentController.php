@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Models\Establishment;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @method Response authorize($ability, $arguments = [])
+ */
 class EstablishmentController extends Controller
 {
     /**
@@ -100,16 +103,17 @@ class EstablishmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Establishment $establishment)
     {
-        // Busca o estabelecimento ou retorna 404 se não existir
-        $establishment = Establishment::findOrFail($id);
+        // Autoriza a ação primeiro
+        $this->authorize('view', $establishment);
 
-        // Busca todos os produtos relacionados a este estabelecimento
-        $products = Product::where('establishment_id', $id)->get();
+        // 2. Carrega a relação de produtos para evitar o problema "N+1"
+        $establishment->load('products');
 
-        // Retorna uma view (por exemplo: establishments/show.blade.php) com os dados
-        return view('establishments.show', compact('establishment', 'products'));
+        // 3. Retorna a view, passando apenas o $establishment
+        // Os produtos estarão disponíveis através de $establishment->products
+        return view('establishments.show', compact('establishment'));
     }
 
     /**

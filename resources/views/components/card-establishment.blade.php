@@ -1,5 +1,5 @@
 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2 p-2">
-    <x-button variant="invisible" size="sm" href="{{ route('establishments.show', ['id' => $id]) }}">   
+    <x-button variant="invisible" size="sm" href="{{ route('establishments.show', ['establishment' => $id]) }}">   
     <div class="card card-establishment card-body h-100">
         <div class="row g-0 h-100">
             <div class="col-4 col-img">

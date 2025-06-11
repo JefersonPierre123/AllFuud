@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::name('index')->get('/', [HomeController::class, 'index']);
 
 Route::prefix('establishments')->name('establishments.')->group(function () {
-    Route::get('{id}/show', [EstablishmentController::class, 'show'])->name('show');
+    Route::get('{establishment}/show', [EstablishmentController::class, 'show'])->name('show');
     Route::middleware('auth')->group(function () {
         Route::post('store', [EstablishmentController::class, 'store'])->name('store');
-        Route::put('{id}', [EstablishmentController::class, 'update'])->name('update');
-        Route::delete('{id}', [EstablishmentController::class, 'destroy'])->name('destroy');
+        Route::put('{establishment}', [EstablishmentController::class, 'update'])->name('update');
+        Route::delete('{establishment}', [EstablishmentController::class, 'destroy'])->name('destroy');
     });
 });
 

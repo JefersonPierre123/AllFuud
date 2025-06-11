@@ -9,9 +9,6 @@
                 <li class="nav-item">
                      <a class="nav-link" href="{{ route('index') }}"><i class="bi bi-house-door-fill me-1"></i>Início</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-journal-text me-1"></i>Cardápio</a>                
-                </li> --}}
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
