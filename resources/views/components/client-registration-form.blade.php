@@ -108,7 +108,7 @@
         <div id="new-address-form-container" class="mt-4"></div>
         @if(!empty($client->addresses))
             <div class="row">
-                @foreach($client->addresses as $address)
+                @foreach($client->addresses->sortByDesc('padrao') as $address)
                     <div class="col-md-6 mb-4" id="card-address-wrapper-{{ $address->id }}">
                         <div id="card-address-{{ $address->id }}" class="card card-custom">
                             <x-card-address :address="$address" />

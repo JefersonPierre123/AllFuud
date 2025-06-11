@@ -20,6 +20,29 @@
         {{-- Grupo: Endereço --}}
         <div class="form-section-title"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</div>
         <div class="row g-3">
+            <div class="col-md-6">
+                <label for="identifier" class="form-label">Identificador</label>
+                <input 
+                    type="text" 
+                    name="identifier" 
+                    id="identifier" 
+                    class="form-control"
+                    value="{{ old('identificador', $address->identificador ?? '') }}"
+                    required
+                >
+            </div>
+            <div class="col-md-4">
+                <label for="default" class="form-label">Endereço Padrão</label>
+                <select name="default" id="default" class="form-select">
+                    <option value="1" {{ old('padrao', $address->padrao ?? 0) == 1 ? 'selected' : '' }}>
+                        Sim
+                    </option>
+                    <option value="0" {{ old('padrao', $address->padrao ?? 0) == 0 ? 'selected' : '' }}>
+                        Não
+                    </option>
+                </select>
+            </div>
+
             <div class="col-md-4">
                 <label for="cep" class="form-label">CEP</label>
                 <input 
@@ -59,7 +82,7 @@
                 <input type="text" name="complement" id="complement" class="form-control" placeholder="Esquina"
                 value="{{ old('complement', $address->complemento ?? '') }}"
                 required>
-            </div>
+            </div>            
         </div>
     
         <div class="mt-4">

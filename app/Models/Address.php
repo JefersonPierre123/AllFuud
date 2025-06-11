@@ -20,6 +20,8 @@ class Address extends Model
         'numero',
         'complemento',
         'client_id',
+        'padrao',
+        'identificador',
     ];
 
     public function client()

@@ -5,7 +5,10 @@
 <div class="card mb-3 shadow-sm border-0">
     <div class="card-body">
         <h5 class="card-title d-flex justify-content-between align-items-center">
-            <span><i class="bi bi-geo-alt-fill me-2"></i>Endereço</span>
+            <span>{{ $address->identificador }}</span>
+            @if($address->padrao)
+                <span class="badge bg-primary ms-2">Endereço Padrão</span>
+            @endif
             <button 
                 type="button" 
                 class="btn btn-sm btn-outline-primary"
