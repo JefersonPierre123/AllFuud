@@ -22,6 +22,29 @@ Route::prefix('establishments')->name('establishments.')->group(function () {
     });
 });
 
+Route::middleware('auth')->prefix('products')->name('products.')->group(function () {
+    Route::post('/store', [EstablishmentController::class, 'storeProduct'])->name('store');
+    Route::put('/{product}', [EstablishmentController::class, 'updateProduct'])->name('update');
+    Route::delete('/{product}', [EstablishmentController::class, 'destroyProduct'])->name('destroy');
+    Route::get('/form/create', function () {
+        return view('components.product-registration-form', [
+            'routeSuffix' => 'store',
+            'method' => 'POST',
+            'routeParams' => [],
+            'product' => null,
+        ])->render();
+    })->name('form.create');
+    Route::get('/form/{productId}', function ($productId) {
+        $product = \App\Models\Product::findOrFail($productId);
+        return view('components.product-registration-form', [
+            'routeSuffix' => 'update',
+            'method' => 'PUT',
+            'routeParams' => [$product->id],
+            'product' => $product,
+        ])->render();
+    })->name('form.edit');
+});
+
 Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function () {
     Route::post('/store', [ClientController::class, 'store'])->name('store');
     Route::put('/{id}', [ClientController::class, 'update'])->name('update');
