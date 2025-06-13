@@ -1,11 +1,12 @@
 {{-- 1. Definimos que o componente espera receber um objeto 'product' --}}
 @props(['product'])
-
 {{-- 2. Usamos as propriedades do objeto $product --}}
-@if ($product->imagem)
-    <img src="{{ asset(path: 'storage/images/products/' . $product->imagem) }}" class="card-img-top w-100"
-        alt="Imagem de {{ $product->nome }}">
-@endif
+<div class="card-img-top">
+    @if ($product->imagem)
+        <img src="{{ asset(path: 'storage/images/products/' . $product->imagem) }}" class="card-img-top w-100"
+            alt="Imagem de {{ $product->nome }}">
+    @endif
+</div>
 
 <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ $product->nome }}</h5>
