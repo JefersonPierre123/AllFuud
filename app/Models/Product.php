@@ -18,6 +18,7 @@ class Product extends Model
         'nome_unidade',
         'valor',
         'establishment_id',
+        'ativo',
     ];
 
     public function establishment()

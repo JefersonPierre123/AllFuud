@@ -105,15 +105,34 @@ class EstablishmentController extends Controller
      */
     public function show(Establishment $establishment)
     {
-        // Autoriza a ação primeiro
+        // 1. Autoriza se o usuário pode ver a página do estabelecimento em si
         $this->authorize('view', $establishment);
 
-        // 2. Carrega a relação de produtos para evitar o problema "N+1"
-        $establishment->load('products');
+        // Pega o usuário autenticado
+        /** @var \App\Models\User|null $user */
+        $user = Auth::user();
 
-        // 3. Retorna a view, passando apenas o $establishment
-        // Os produtos estarão disponíveis através de $establishment->products
+        // 2. Verifica se o usuário é o dono do estabelecimento
+        // Usamos a habilidade 'update' da policy como uma forma de checar a propriedade
+        $isOwner = $user && $user->can('update', $establishment);
+
+        // 3. Carrega os produtos com base na condição
+        if ($isOwner) {
+            // Se for o dono, carrega TODOS os produtos (ativos e inativos)
+            // Podemos ordenar para mostrar os ativos primeiro, por exemplo
+            $establishment->load(['products' => function ($query) {
+                $query->orderBy('ativo', 'desc')->orderBy('nome', 'asc');
+            }]);
+        } else {
+            // Se for um cliente ou visitante, carrega APENAS os produtos ativos
+            $establishment->load(['products' => function ($query) {
+                $query->where('ativo', true)->orderBy('nome', 'asc');
+            }]);
+        }
+
+        // 4. Retorna a view. A variável $establishment->products já está filtrada.
         return view('establishments.show', compact('establishment'));
+
     }
 
     /**

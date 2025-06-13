@@ -7,6 +7,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,9 +24,10 @@ Route::prefix('establishments')->name('establishments.')->group(function () {
 });
 
 Route::middleware('auth')->prefix('products')->name('products.')->group(function () {
-    Route::post('/store', [EstablishmentController::class, 'storeProduct'])->name('store');
-    Route::put('/{product}', [EstablishmentController::class, 'updateProduct'])->name('update');
-    Route::delete('/{product}', [EstablishmentController::class, 'destroyProduct'])->name('destroy');
+    Route::post('/store', [ProductController::class, 'store'])->name('store');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+    Route::patch('/{product}/deactivate', [ProductController::class, 'deactivate'])->name('deactivate');
+    Route::patch('/{product}/reactivate', [ProductController::class, 'reactivate'])->name('reactivate');
     Route::get('/form/create', function () {
         return view('components.product-registration-form', [
             'routeSuffix' => 'store',

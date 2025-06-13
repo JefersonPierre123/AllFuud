@@ -6,7 +6,7 @@
 ])
 
 <div class="card card-custom">
-    <form action="{{ route('products.' . $routeSuffix, $routeParams) }}" method="POST" class="container mt-4">
+    <form action="{{ route('products.' . $routeSuffix, $routeParams) }}" method="POST" class="container mt-4" enctype="multipart/form-data">
 
         @if (in_array(strtoupper($method), ['PUT', 'PATCH']))
             @method($method)
