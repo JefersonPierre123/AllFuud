@@ -6,10 +6,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                     <a class="nav-link" href="{{ route('index') }}"><i class="bi bi-house-door-fill me-1"></i>Início</a>
-                </li>
                 @auth
+                    @if (Auth::user()->establishment_id)
+                        <a class="nav-link" href="{{ route('establishments.show', ['establishment' => Auth::user()->establishment_id]) }}">
+                            <i class="bi bi-shop me-1"></i>Meu Estabelecimento
+                        </a>
+                    @else
+                        <a class="nav-link" href="{{ route('index') }}">
+                            <i class="bi bi-house-door-fill me-1"></i>Início
+                        </a>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
                     </li>
@@ -26,6 +32,9 @@
                         </form>
                     </li>
                 @elseguest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('index') }}"><i class="bi bi-house-door-fill me-1"></i>Início</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">
                             <i class="bi bi-box-arrow-in-right me-1"></i>Entrar

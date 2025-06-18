@@ -17,9 +17,8 @@ Route::name('index')->get('/', [HomeController::class, 'index']);
 Route::prefix('establishments')->name('establishments.')->group(function () {
     Route::get('{establishment}/show', [EstablishmentController::class, 'show'])->name('show');
     Route::middleware('auth')->group(function () {
-        Route::post('store', [EstablishmentController::class, 'store'])->name('store');
-        Route::put('{establishment}', [EstablishmentController::class, 'update'])->name('update');
-        Route::delete('{establishment}', [EstablishmentController::class, 'destroy'])->name('destroy');
+        Route::post('/store', [EstablishmentController::class, 'store'])->name('store');
+        Route::put('/{establishment}', [EstablishmentController::class, 'update'])->name('update');
     });
 });
 
@@ -49,14 +48,12 @@ Route::middleware('auth')->prefix('products')->name('products.')->group(function
 
 Route::middleware( 'auth' )->prefix('clients')->name('clients.')->group(function () {
     Route::post('/store', [ClientController::class, 'store'])->name('store');
-    Route::put('/{id}', [ClientController::class, 'update'])->name('update');
-    Route::delete('/{id}', [ClientController::class, 'destroy'])->name('destroy');
+    Route::put('/{client}', [ClientController::class, 'update'])->name('update');
 });
 
 Route::middleware('auth')->prefix('addresses')->name('addresses.')->group(function () {
     Route::post('/store', [AddressController::class, 'store'])->name('store');
-    Route::put('/{id}', [AddressController::class, 'update'])->name('update');
-    Route::delete('/{id}', [AddressController::class, 'destroy'])->name('destroy');
+    Route::put('/{address}', [AddressController::class, 'update'])->name('update');
     Route::get('/form/create', function () {
         return view('components.address-registration-form', [
             'routeSuffix' => 'store',

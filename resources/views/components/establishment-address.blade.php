@@ -11,7 +11,7 @@
                     name="cep" 
                     id="cep" 
                     class="form-control" 
-                    placeholder="00000-000" 
+                    placeholder="00000000" 
                     onblur="buscarEndereco()" 
                     value="{{ old('cep', $establishment->cep ?? '') }}"
                     required
