@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Establishment;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class EstablishmentPolicy
 {
@@ -48,7 +47,6 @@ class EstablishmentPolicy
      */
     public function update(User $user, Establishment $establishment): bool
     {
-        // A lógica para update continua a mesma, restrita ao dono.
         return $user->establishment_id === $establishment->id;
     }
 
@@ -57,8 +55,8 @@ class EstablishmentPolicy
      */
     public function delete(User $user, Establishment $establishment): bool
     {
-        // A lógica para delete também continua a mesma.
-        return $user->establishment_id === $establishment->id;
+        // return $user->establishment_id === $establishment->id;
+        return false;
     }
 
     /**

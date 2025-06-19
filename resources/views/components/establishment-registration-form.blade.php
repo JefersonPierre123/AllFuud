@@ -27,7 +27,7 @@
                     name="cnpj" 
                     id="cnpj" 
                     class="form-control" 
-                    placeholder="AA.AAA.AAA/AAAA-DV" 
+                    placeholder="AAAAAAAAAAAADV" 
                     value="{{ old('cnpj', $establishment->cnpj ?? '') }}"
                     onblur="verificarCNPJ()" 
                     required
@@ -84,7 +84,7 @@
                     name="phone" 
                     id="phone" 
                     class="form-control" 
-                    placeholder="(00) 00000-0000" 
+                    placeholder="00000-0000" 
                     value="{{ old('phone', $establishment->telefone ?? '') }}"
                     required
                     @if($method !== 'PUT') disabled @endif

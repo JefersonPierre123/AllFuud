@@ -27,7 +27,7 @@
                     name="cpf" 
                     id="cpf" 
                     class="form-control" 
-                    placeholder="000.000.000-00" 
+                    placeholder="00000000000" 
                     value="{{ old('cpf', $client->cpf ?? '') }}"
                     onblur="verificarCPF()"
                     required
@@ -78,7 +78,7 @@
                     type="text" 
                     name="phone" 
                     class="form-control" 
-                    id="phone" placeholder="(00) 00000-0000" 
+                    id="phone" placeholder="000000000" 
                     value="{{ old('phone', $client->telefone ?? '') }}"
                     required
                     @if($method !== 'PUT') disabled @endif

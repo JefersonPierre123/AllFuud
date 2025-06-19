@@ -97,8 +97,10 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Address $address)
     {
+        $this->authorize('update', $address);
+
         // 1. Validação dos dados (adicionei o campo 'padrao')
         $validated = $request->validate([
             'client_id'    => 'required|exists:clients,id',
@@ -115,16 +117,13 @@ class AddressController extends Controller
 
         try {
             // Inicia uma transação para garantir a integridade dos dados
-            DB::transaction(function () use ($validated, $id) {
-                
-                // Pega o endereço que será atualizado
-                $address = Address::findOrFail($id);
+            DB::transaction(function () use ($validated, $address) {
 
                 // 2. Lógica para garantir apenas um endereço padrão
                 // Se o campo 'padrao' veio como 'true' na requisição...
                 if ($validated['default'] ?? false) {
                     Address::where('client_id', $validated['client_id'])
-                           ->where('id', '!=', $id) // ...em todos os outros endereços do cliente...
+                           ->where('id', '!=', $address -> id) // ...em todos os outros endereços do cliente...
                            ->update(['padrao' => false]); // ...define 'padrao' como 'false'.
                 }
 
