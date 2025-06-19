@@ -2,13 +2,14 @@
 @import url(navbar.css);
 @import url(card-establishment.css);
 @import url(button.css);
+@import url(checkout.css);
 
 .container {
     max-width: 1250px !important;
 }
 
 body {
-    padding-top: 56px;
+    /* padding-top: 56px; */
     padding-bottom: 60px;
 }
 
