@@ -26,9 +26,12 @@
 
             @auth
                 @if (Auth::user()->client_id)
-                    <x-button variant="secondary" icon="bi bi-cart" size="sm" {{-- Lógica para adicionar ao carrinho --}}>
-                        Adicionar ao Carrinho
-                    </x-button>
+                    <form action="{{ route('checkout.createCart') }}" method="POST">
+                        @csrf
+                        <x-button variant="secondary" icon="bi bi-cart" size="sm" type="submit">
+                            Adicionar ao Carrinho
+                        </x-button>
+                    </form>
 
                     {{-- Verifica se o usuário logado é o dono DESTE produto específico --}}
                 @elseif(Auth::user()->establishment_id === $product->establishment_id)

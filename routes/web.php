@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\ClientController;
@@ -89,6 +90,12 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/register', [UserController::class, 'store']);
+
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout');
+Route::post('/checkout/cart', [CheckoutController::class, 'createCart'])->name('checkout.createCart');
+
+
+//Route::get('/cart', [CheckoutController::class, 'showCart'])->name('cart.show');
 
 
 
