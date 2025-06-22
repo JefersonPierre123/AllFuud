@@ -115,7 +115,7 @@
 
         <div class="mt-4">
             <x-button variant="primary" type="submit" size="lg">
-                <i class="bi bi-send-fill me-1"></i> @if($method === 'POST') Cadastrar @else Atualizar @endif Cliente
+                <i class="bi bi-send-fill me-1"></i> @if($method === 'POST') Cadastrar @else Atualizar @endif Estabelecimento
             </x-button>
         </div>
     </form>

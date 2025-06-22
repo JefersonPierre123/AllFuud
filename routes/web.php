@@ -90,6 +90,9 @@ Route::post('/register', [UserController::class, 'store']);
 
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout');
 Route::post('/checkout/cart', [CheckoutController::class, 'createCart'])->name('checkout.createCart');
+Route::post('/checkout/saveAddress', [CheckoutController::class, 'saveAddress'])->name('checkout.saveAddress');
+Route::post('/checkout/removeAddress', [CheckoutController::class, 'removeAddress'])->name('checkout.removeAddress');
+Route::post('/checkout/checkoutResume', [CheckoutController::class, 'showCheckoutResume'])->name('checkout.resume');
 
 Route::get('/cart', [CheckoutController::class, 'showCart'])->name('cart.index');
 

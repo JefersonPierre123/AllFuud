@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('token')->unique();
             $table->json('items')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->json('address')->nullable();
             $table->timestamps();
         });
     }

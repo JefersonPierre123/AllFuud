@@ -17,7 +17,7 @@
                         </a>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
+                        <a class="nav-link" href="{{ route('cart.index') }}"><i class="bi bi-cart-fill me-1"></i>Carrinho</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('profile.index') }}">

@@ -14,7 +14,7 @@
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <button type="submit" class="btn btn-danger w-100">Entrar</button>
         </form>
         <div class="mt-3 text-center">
             <a href="{{ route('register') }}">Não tem uma conta? Registre-se</a>

@@ -22,7 +22,7 @@ function buscarEndereco() {
     })
     .catch(error => {
       console.error('Erro ao buscar o CEP:', error);
-      alert('Erro ao buscar o CEP.');
+      alert('Erro ao buscar o CEP.', { error }); 
     });
 }
 

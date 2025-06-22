@@ -2,6 +2,7 @@
 @import url(navbar.css);
 @import url(card-establishment.css);
 @import url(button.css);
+@import url(checkout.css);
 
 .container {
     max-width: 1250px !important;

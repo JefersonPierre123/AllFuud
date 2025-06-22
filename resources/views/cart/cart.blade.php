@@ -28,6 +28,9 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('checkout') }}" class="btn btn-success mt-3">
+            Finalizar Pedido
+        </a>
     @else
         <p>Seu carrinho está vazio.</p>
     @endif

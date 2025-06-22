@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,9 +25,22 @@ class CheckoutController extends Controller
         $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
         $cart = Cart::where('token', $token)->first();
         $items = $cart ? $cart->items : [];
-
-        return view('checkout.checkout-form', compact('items'));
-
+        foreach ($items as $item) {
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                $item['imagem'] = $product->imagem;
+                $item['valor'] = $product->valor;
+                $item['nome'] = $product->nome;
+            } else {
+                unset($item);
+            }
+        }
+        $client = auth()->user()->client;
+        if ($cart && $client) {
+            $cart->client_id = $client->id;
+            $cart->save();
+        }
+        return view('checkout.checkout', compact('cart', 'items'));
     }
 
     public function createCart(Request $request)
@@ -74,6 +88,75 @@ class CheckoutController extends Controller
         );
 
         return redirect()->route('cart.index')->with('success', 'Cart created!');
+    }
+
+    public function saveAddress(Request $request)
+    {
+        $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
+        $cart = Cart::where('token', $token)->first();
+        $address = $cart ? $cart->address : [];
+
+        $setAddress = [
+            'cep' => $request->input('cep'),
+            'rua' => $request->input('street'),
+            'numero' => $request->input('number'),
+            'complemento' => $request->input('complement'),
+            'bairro' => $request->input('neighborhood'),
+            'cidade' => $request->input('city'),
+            'estado' => $request->input('state'),
+        ];
+
+        $cart = Cart::updateOrCreate(
+            ['token' => $token],
+            ['address' => $setAddress]
+        );
+
+        return redirect()->back()->with('success', 'Endereço salvo com sucesso!');
+    }
+
+    public function removeAddress(Request $request)
+    {
+        $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
+        $cart = Cart::where('token', $token)->first();
+        if ($cart) {
+            $cart->address = null;
+            $cart->save();
+        }
+        return redirect()->back()->with('success', 'Endereço removido com sucesso!');
+    }
+
+    public function removeItem(Request $request, $productId)
+    {
+        $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
+        $cart = Cart::where('token', $token)->first();
+        if ($cart) {
+            $items = $cart->items;
+            foreach ($items as $key => $item) {
+                if ($item['product_id'] == $productId) {
+                    unset($items[$key]);
+                    break;
+                }
+            }
+            $cart->items = array_values($items);
+            $cart->save();
+        }
+        return redirect()->back()->with('success', 'Item removido com sucesso!');
+    }
+
+    public function showCheckoutResume(Request $request)
+    {
+        $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
+        $cart = Cart::where('token', $token)->first();
+        if (!$cart) {
+            return redirect()->route('checkout')->with('error', 'Carrinho não encontrado.');
+        }
+        $client = Client::find($cart->client_id);
+        $items = $cart->items;
+        $address = $cart->address;
+
+        setcookie('cart_token', '', time() - 3600, '/');
+        
+        return view('checkout.resume', compact('client', 'address', 'items'));
     }
 
 }

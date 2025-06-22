@@ -30,7 +30,7 @@
                     <label for="password_confirmation" class="form-label">Confirmar Senha</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirme a Senha" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                <button type="submit" class="btn btn-danger w-100">Cadastrar</button>
             </form>
 
             <div class="mt-3 text-center">
