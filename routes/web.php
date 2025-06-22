@@ -91,8 +91,7 @@ Route::post('/register', [UserController::class, 'store']);
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout');
 Route::post('/checkout/cart', [CheckoutController::class, 'createCart'])->name('checkout.createCart');
 
-
-//Route::get('/cart', [CheckoutController::class, 'showCart'])->name('cart.show');
+Route::get('/cart', [CheckoutController::class, 'showCart'])->name('cart.index');
 
 
 

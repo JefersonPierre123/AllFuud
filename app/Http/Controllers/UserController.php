@@ -32,7 +32,7 @@ class UserController extends Controller
         $guard = auth();
         $guard->login($user);
 
-        return redirect()->route('index')->with('success', 'Registro realizado com sucesso! Você está logado.');
+        return redirect()->route('profile.index')->with('success', 'Registro realizado com sucesso! Você está logado.');
     }
 
     public function logout(Request $request)

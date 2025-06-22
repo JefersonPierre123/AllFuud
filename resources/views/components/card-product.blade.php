@@ -31,6 +31,7 @@
                         <x-button variant="secondary" icon="bi bi-cart" size="sm" type="submit">
                             Adicionar ao Carrinho
                         </x-button>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                     </form>
 
                     {{-- Verifica se o usuário logado é o dono DESTE produto específico --}}

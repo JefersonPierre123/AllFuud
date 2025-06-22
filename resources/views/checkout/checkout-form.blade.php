@@ -61,6 +61,8 @@
             <img src="{{ $item['imagem'] }}">
             <p>{{ $item['nome'] }}</p>
             <p>{{ $item['valor'] }}</p>
+            <p>Quantidade: {{ $item['quantidade'] }}</p>
+            <p>Total: {{ $item['valor'] * $item['quantidade'] }}</
         </div>
     @endforeach
 @else
