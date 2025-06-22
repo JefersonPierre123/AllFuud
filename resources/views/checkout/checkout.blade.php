@@ -174,7 +174,7 @@
                             <div class="card card-product-checkout card-body h-100 mb-2">
                                 <div class="row g-0 h-100">
                                     <div class="col-4 col-img">
-                                        <img src="" class="establishment-img" alt="Imagem do Estabelecimento">
+                                        <img src="{{ asset(path: 'storage/images/products/' . $item['imagem']) }}" class="establishment-img" alt="Imagem do Estabelecimento">
                                     </div>
                                     <div class="col-8">
                                         <div class="card-body d-flex flex-column h-100">

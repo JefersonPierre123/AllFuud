@@ -125,23 +125,20 @@ class CheckoutController extends Controller
         return redirect()->back()->with('success', 'Endereço removido com sucesso!');
     }
 
-    public function removeItem(Request $request, $productId)
-    {
-        $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
-        $cart = Cart::where('token', $token)->first();
-        if ($cart) {
-            $items = $cart->items;
-            foreach ($items as $key => $item) {
-                if ($item['product_id'] == $productId) {
-                    unset($items[$key]);
-                    break;
-                }
-            }
-            $cart->items = array_values($items);
-            $cart->save();
-        }
-        return redirect()->back()->with('success', 'Item removido com sucesso!');
+    public function removeItem(Request $request)
+{
+    $token = $request->cookie('cart_token') ?? ($_COOKIE['cart_token'] ?? null);
+    $cart = Cart::where('token', $token)->first();
+
+    if ($cart && isset($request->item_index)) {
+        $items = $cart->items ?? [];
+        unset($items[$request->item_index]);
+        $cart->items = array_values($items);
+        $cart->save();
     }
+
+    return redirect()->route('cart.index')->with('success', 'Produto removido do carrinho!');
+}
 
     public function showCheckoutResume(Request $request)
     {

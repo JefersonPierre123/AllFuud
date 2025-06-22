@@ -95,6 +95,7 @@ Route::post('/checkout/removeAddress', [CheckoutController::class, 'removeAddres
 Route::post('/checkout/checkoutResume', [CheckoutController::class, 'showCheckoutResume'])->name('checkout.resume');
 
 Route::get('/cart', [CheckoutController::class, 'showCart'])->name('cart.index');
+Route::post('/cart/remove-item', [CheckoutController::class, 'removeItem'])->name('cart.removeItem');
 
 
 
