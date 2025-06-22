@@ -7,7 +7,7 @@
     @stack('styles')
     <x-styles />
 </head>
-<body class="bg-light">
+<body class="bg-light pt-0">
     <div class="container py-5">
         <div class="row g-0">
             <!-- Coluna 1: Dados do Cliente -->
