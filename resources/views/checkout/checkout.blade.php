@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,7 @@
                         <div class="card card-checkout mb-2">
                             <div class="card-body">
                                 <h2 class="h5 mb-3"><span class="count-card">2</span> Endereço de entrega</h2>
-                                @if(!empty($cart->address))
+                                @if($client->mainDeliveryAddress()->exists() && $cart->address['removed'] == false || $cart->address['manual'] == true && $cart->address['removed'] == true)
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <h5 class="card-title">
@@ -103,7 +104,8 @@
                             <div class="card-body">
                                 <h2 class="h5 mb-3"><span class="count-card">3</span> Forma de Pagamento</h2>
                                 <div class="mb-3">
-                                    <label for="forma-pagamento" class="form-label">Escolha a forma de pagamento:</label>
+                                    <label for="forma-pagamento" class="form-label">Escolha a forma de
+                                        pagamento:</label>
                                     <select id="forma-pagamento" class="form-select w-auto">
                                         <option value="cartao">Cartão de Crédito</option>
                                         <option value="pix">PIX</option>
@@ -130,7 +132,8 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="cvv" class="form-label">CVV</label>
-                                                <input type="number" id="cvv" class="form-control" placeholder="CVV" required maxlength="3">
+                                                <input type="number" id="cvv" class="form-control" placeholder="CVV"
+                                                    required maxlength="3">
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +146,7 @@
                                                 class="rounded">
                                         </div>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                         </div>
@@ -155,39 +158,45 @@
                 @php
                     $total = 0;
                 @endphp
-            <div class="card card-resume">
-                <div class="card-body">
-                    <h2 class="h5 mb-3">Resumo do Pedido</h2>
-                    @foreach ($items as $item)
-                        @php
-                            $valor = isset($item['valor']) ? floatval($item['valor']) : 0;
-                            $quantidade = isset($item['quantidade']) ? intval($item['quantidade']) : 1;
-                            $subtotal = $valor * $quantidade;
-                            $total += $subtotal;
-                        @endphp
-                        <div class="card card-product-checkout card-body h-100 mb-2">
-                            <div class="row g-0 h-100">
-                                <div class="col-4">
-                                    <img src="{{ asset(path: 'storage/images/products/' . $item['imagem']) }}" class="establishment-img" alt="Imagem do Estabelecimento">
+                <form action="{{ route('checkout.resume') }}" method="post">
+                    @csrf
+                    <div class="card card-resume">
+                        <div class="card-body">
+                            <h2 class="h5 mb-3">Resumo do Pedido</h2>
+                            @foreach ($items as $item)
+                                @php
+                                    $valor = isset($item['valor']) ? floatval($item['valor']) : 0;
+                                    $quantidade = isset($item['quantidade']) ? intval($item['quantidade']) : 1;
+                                    $subtotal = $valor * $quantidade;
+                                    $total += $subtotal;
+                                @endphp
+                                <div class="card card-product-checkout card-body h-100 mb-2">
+                                    <div class="row g-0 h-100">
+                                        <div class="col-4">
+                                            <img src="{{ asset(path: 'storage/images/products/' . $item['imagem']) }}"
+                                                class="establishment-img" alt="Imagem do Estabelecimento">
+                                        </div>
+                                        <div class="col-8 ps-2">
+                                            <p class="card-subtitle mb-1 text-muted">{{ $item['nome'] }}</p>
+                                            <p class="card-subtitle mb-1 text-muted">x{{ $item['quantidade'] }}</p>
+                                            <h6 class="card-title text-success mb-2">R$
+                                                {{ number_format($subtotal, 2, ',', '.') }}
+                                            </h6>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-8 ps-2">
-                                    <p class="card-subtitle mb-1 text-muted">{{ $item['nome'] }}</p>
-                                    <p class="card-subtitle mb-1 text-muted">x{{ $item['quantidade'] }}</p>
-                                    <h6 class="card-title text-success mb-2">R$ {{ number_format($subtotal, 2, ',', '.') }}</h6>
-                                </div>
+                            @endforeach
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <strong>Total:</strong>
+                                <strong class="text-success">R$ {{ number_format($total, 2, ',', '.') }}</strong>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-danger w-100 mt-4">Finalizar Pedido</button>
                             </div>
                         </div>
-                    @endforeach
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <strong>Total:</strong>
-                        <strong class="text-success">R$ {{ number_format($total, 2, ',', '.') }}</strong>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-danger w-100 mt-4">Finalizar Pedido</button>
-                    </div>
-                </div>
-            </div>
+                </form>
             </div>
         </div>
     </div>
@@ -196,4 +205,5 @@
     @stack('scripts')
     <x-scripts />
 </body>
+
 </html>

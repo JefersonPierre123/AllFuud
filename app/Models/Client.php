@@ -24,6 +24,11 @@ class Client extends Model
         return $this->hasMany(Address::class);
     }
 
+    public function mainDeliveryAddress()
+    {
+        return $this->hasOne(Address::class)->where('padrao', true);
+    }
+
     public function user()
     {
         return $this->hasOne(User::class);
