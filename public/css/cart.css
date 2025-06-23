@@ -1,0 +1,37 @@
+.cart-item-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.cart-item-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.cart-item-body {
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.cart-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #e21a1a;
+}
+
+.remove-btn {
+    border-radius: 999px;
+    font-weight: 500;
+}
+
+.checkout-btn {
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.75rem 2rem;
+}

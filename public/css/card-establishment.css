@@ -15,14 +15,18 @@
 
 .establishment-img {
     object-fit: contain;
-    height: 180px;
+    max-height: 140px;
     width: 100%;
+    display: block;
 }
 
 .col-img {
     max-width: 100px;
     padding: 0;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-body {
@@ -35,7 +39,7 @@
     color: #000000;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .card-subtitle {
@@ -43,7 +47,7 @@
     color: #6c757d;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .card-text {
