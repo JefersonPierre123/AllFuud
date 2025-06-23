@@ -3,6 +3,7 @@
 @import url(card-establishment.css);
 @import url(button.css);
 @import url(checkout.css);
+@import url(product.css);
 
 .container {
     max-width: 1250px !important;
