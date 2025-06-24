@@ -17,12 +17,14 @@
             <div class="col-12">
                 <div class="card-order p-4 mb-2 align-items-center text-center">
                     <div class="section-title text-danger">⏳ Pedido sendo preparado</div>
-
                     <p><strong>Previsão de entrega:</strong> 25 - 35 minutos</p>
                     <p><strong>Atendente responsável:</strong> Carlos Henrique</p>
                     <p class="text-muted small">Fique tranquilo! Assim que sair para entrega, avisaremos por aqui.</p>
                     <div class="spinner-border text-danger me-2" role="status">
                         <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <div>
+                        <a href="{{ route('index') }}" class="btn btn-danger mt-2">Voltar para o inicio</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +43,7 @@
                     <div class="section-title">Endereço de Entrega</div>
                     @if($address)
                         <p>{{ $address['rua'] ?? '' }}, {{ $address['numero'] ?? '' }}</p>
-                        <p>{{ $address['complemento'] ?? '' }}</p>
+                        <p><strong>Complemento:</strong> {{ $address['complemento'] ?? '' }}</p>
                         <p>{{ $address['cidade'] ?? '' }} - {{ $address['estado'] ?? '' }}</p>
                         <p>CEP: {{ $address['cep'] ?? '' }}</p>
                     @else
