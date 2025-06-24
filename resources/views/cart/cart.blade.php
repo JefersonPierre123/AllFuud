@@ -49,7 +49,7 @@
             <p class="mb-1">Itens: <strong>{{ $quantidadeTotal }}</strong></p>
             <p class="mb-3">Total: <span class="cart-price">R$ {{ number_format($total, 2, ',', '.') }}</span></p>
             <div class="d-grid mb-2">
-              <a href="{{ route('checkout') }}" class="btn btn-secondary checkout-btn">
+              <a href="{{ route('index') }}" class="btn btn-secondary checkout-btn">
                 Continuar comprando
               </a>
             </div>
