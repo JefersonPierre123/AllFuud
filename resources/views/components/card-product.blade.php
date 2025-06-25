@@ -2,7 +2,7 @@
 @props(['product'])
 
 {{-- 2. Usamos as propriedades do objeto $product --}}
-<div class="product-card mb-4">
+<div class="product-card card mb-4">
     @if ($product->imagem)
         <img
             src="{{ asset(path: 'storage/images/products/' . $product->imagem) }}"
